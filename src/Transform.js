@@ -108,6 +108,7 @@ img {
 }
 /* 벤더 프리픽스(각 브라우저의 버전에서 동작하도록 적어주는 것들 -moz-, -ms-, -webkit- 등등..) 생략 */
 .jin1 {transform:rotate(20deg);}
+/* rotate 회전, scale 크기(부피) 조절, skew 기울기 조절, translate 원래 위치를 기준으로 이동 */
 .jin1.active {transform:rotate(0deg);}
 .jin2 {transform:scale(.7);}
 .jin2.active {transform:scale(1);}
