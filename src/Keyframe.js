@@ -34,7 +34,6 @@ const move = keyframes`
   100% {
     transform:translate(600px, 200px);
   }
-
 `;
 
 const Rotate = styled.div`
