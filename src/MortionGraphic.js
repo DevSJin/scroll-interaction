@@ -30,10 +30,10 @@ font-size:0;
 
 const move = keyframes`
   0% {
-    transform:rotate(-140deg);
+    transform:rotate(-18deg);
   }
   100% {
-    transform:rotate(4deg);
+    transform:rotate(14deg);
   }
 `;
 
