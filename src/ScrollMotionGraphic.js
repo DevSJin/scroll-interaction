@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled, {keyframes} from 'styled-components'
 import Moon from './images/motion_moon.png'
 import Rope from './images/motion_rope.png'
@@ -9,6 +9,22 @@ import Night from './images/motion_sky4.gif'
 import body from './images/motion_body2.png'
 import hand from './images/motion_hand_right.png'
 const ScrollMotionGraphic = () => {
+  const getScrollPercentage = () => {
+    const curScrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+
+    const realScrollHeight = scrollHeight - clientHeight;
+    const percentage = Math.floor((curScrollTop / realScrollHeight) * 100);
+    console.log(percentage)
+  };
+  
+  useEffect(() => {
+    window.addEventListener('scroll', getScrollPercentage);
+    return () => window.removeEventListener('scroll', getScrollPercentage);
+  }, []);
+
+
 return (
     <div>
     <Area>
@@ -17,11 +33,11 @@ return (
         <div className="bg three" />
         <div className="bg four" />
         <MotionRope src={Rope} alt='' className="motion_rope" />
-        <Motion class="motion_ggang">
-            <Figure class="ch_body" style={{zIndex:'20'}}>
+        <Motion className="motion_ggang">
+            <Figure className="ch_body" style={{zIndex:'20'}}>
                 <img src={body} style={{width: '100%'}} alt=""/>
             </Figure>
-            <HandMove class="ch_hand_right" style={{zIndex:'10'}}>
+            <HandMove className="ch_hand_right" style={{zIndex:'10'}}>
                 <img src={hand} style={{width: '100%'}} alt="" />
             </HandMove>
         </Motion>
@@ -68,7 +84,7 @@ transition:1s;
 `
 
 const MotionRope = styled.div`
-position: fixed; left:10%; top:0; 
+position: fixed; left:150px; top:0; 
 z-index:20; width:20px; height: 100%; 
 background-image:url(${Rope}); 
 background-repeat: repeat-y; 
