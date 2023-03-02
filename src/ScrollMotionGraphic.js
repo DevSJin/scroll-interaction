@@ -9,25 +9,85 @@ import Night from './images/motion_sky4.gif'
 import body from './images/motion_body2.png'
 import hand from './images/motion_hand_right.png'
 const ScrollMotionGraphic = () => {
-  const getScrollPercentage = () => {
-    const curScrollTop = document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
+  window.onload = function() {
 
-    const realScrollHeight = scrollHeight - clientHeight;
-    const percentage = Math.floor((curScrollTop / realScrollHeight) * 100);
-    console.log(percentage)
-  };
+    let scrollBody = document.querySelector('.motion_area');
+    let parallaxDistance = 210;
+    let bgContent = scrollBody.querySelectorAll('.bg');
+    let ggangBody = scrollBody.querySelector('.motion_ggang');
+    let moonBody = scrollBody.querySelector('.motion_moon');
   
-  useEffect(() => {
-    window.addEventListener('scroll', getScrollPercentage);
-    return () => window.removeEventListener('scroll', getScrollPercentage);
-  }, []);
+    let scrollHeight;
+    let scrollRealHeight;
+    let winScrollTop;
+    let percent;
+    let moveDistance;
+  
+    function setProperty() {
+  
+      scrollHeight = scrollBody.offsetHeight;
+      scrollRealHeight = (scrollHeight - window.innerHeight);
+      winScrollTop = window.pageYOffset;
+      let scrollPerecnt = winScrollTop / scrollRealHeight;
+      percent = scrollPerecnt * 100;
+      moveDistance = scrollPerecnt * parallaxDistance;
+    };
+  
+    function motionGgang(){
+  
+      setProperty();
+      changeBackgound();
+      parallaxMove();
+    };
+  
+    function changeBackgound() {
+      if(percent < 25){
+        setBackground(0);
+      }else if(percent >= 25 && percent < 50){
+        setBackground(1);
+      }else if(percent >= 50 && percent < 75){
+        setBackground(2);
+        moonBody.classList.remove('active');
+      }else if(percent >= 75 && percent < 100){
+        setBackground(3);
+        moonBody.classList.add('active');
+  
+      }
+    };
+  
+    function setBackground(index) {
+      bgContent.forEach(function(el) {
+        el.classList.remove('active');
+      });
+  
+      bgContent[index].classList.add('active');
+    };
+  
+    function parallaxMove() {
+      ggangBody.style.transform = 'translate(0px,'+ moveDistance +'px)';
+    };
+  
+    function init() {
+      motionGgang();
+    };
+  
+    window.addEventListener('scroll', function() {
+      motionGgang();
+    }, false);
+  
+    window.addEventListener('resize', function() {
+      motionGgang();
+    }, false);
+  
+    init();
+  
+  
+  };
 
 
 return (
     <div>
-    <Area>
+    <Area className='motion_area'>
         <div className="bg one active" />
         <div className="bg two" />
         <div className="bg three" />
@@ -41,7 +101,7 @@ return (
                 <img src={hand} style={{width: '100%'}} alt="" />
             </HandMove>
         </Motion>
-        <MotionMoon>
+        <MotionMoon className='motion_moon'>
             <img src={Moon} alt='' />
         </MotionMoon>
     </Area>
