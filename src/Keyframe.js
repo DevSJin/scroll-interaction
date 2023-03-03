@@ -5,7 +5,7 @@ import styled, {keyframes} from 'styled-components'
 const Keyframe = () => {
     const move = () => {
         setTimeout(() => {
-            document.querySelector('.ani').className += ' active'
+            document.querySelector('.ani').classList.add('active')
         }, 2000)
     }
     const stop = () => {
@@ -40,7 +40,7 @@ const Rotate = styled.div`
 display: inline-block;
 padding: 2rem 1rem;
 font-size: 1.2rem;
-animation-name: ${move};
+animation: ${move};
 animation-duration: 4s; /*한번 재생걸리는시간*/
 animation-delay: 0s; /*애니메이션 지연*/
 animation-direction: alternate; /* 애니메이션 재생방향 alternate :순방향, reverse: 역방향*/
